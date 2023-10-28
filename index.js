@@ -30,7 +30,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(session({
+app.use(expressSession({
   // ...
   cookie: {
       secure: true, // Use secure cookies in production (requires HTTPS)
