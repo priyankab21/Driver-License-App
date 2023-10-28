@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("layouts/header") -%>
+
+    <body>
+        <!-- Navigation-->
+        <%- include("layouts/navbar") -%>
+
+            <!-- Page Header-->
+            <header class="masthead" style="background-image: url('assets/img/Examiner_1.jpg')">
+                <div class="container position-relative px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <div class="page-heading">
+                                <h1>Examiner</h1>
+                                <!-- <span class="subheading">Have questions? I have answers.</span> -->
+                            </div>
+                            <form style="background-color: #6ec7bc6e; border-radius: 8px; padding:20px;" action="/searchByTestype" method="post">
+                                Search by Test Type: <select name="type" id="type">
+                                    <option value="G">G</option>
+                                    <option value="G2">G2</option>
+                                </select>
+                                <input class="subb" type="submit" />
+                            </form>
+
+                            <br/>
+                            <br/>
+
+
+                            <div id="appointmentsTable">
+                                <table id="table">
+                                    <tr id="tableHeadingRow">
+                                        <th id="tableHeading">Username</th>
+                                        <th id="tableHeading">Appointment Date</th>
+                                        <th id="tableHeading">Appointment Time</th>
+                                        <th id="tableHeading">Test Type</th>
+                                        <th id="tableHeading">Status</th>
+                                        <th id="tableHeading">Comments</th>
+                                    </tr>
+                                    <% for( let i = 0; i < appointments.length; i++ ) { %>
+                                        <tr id="tableDataRow">
+                                            <td id="tableData">
+                                                <a style="color:#f63e3e;" href="/getUserDetails?id=<%= appointments[i]._id %>">
+                                                    <%= appointments[i].firstName ? appointments[i].firstName + " " + appointments[i].lastName : null %>
+                                                </a>
+                                            </td>
+                                            <td id="tableData">
+                                                <%= appointments[i].appointmentID ? formatDate(new Date(appointments[i].appointmentID.date)) : null %>
+                                            </td>
+                                            <td id="tableData">
+                                                <%= appointments[i].appointmentID ? appointments[i].appointmentID.time : null %>
+                                            </td>
+                                            <td id="tableData">
+                                                <%= appointments[i].testType ? appointments[i].testType : null %>
+                                            </td>
+                                            <td id="tableData">
+                                                <%= appointments[i].testStatus ? appointments[i].testStatus : null %>
+                                            </td>
+                                            <td id="tableData">
+                                                <%= appointments[i].comments ? appointments[i].comments : null %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <% function formatDate(appointmentDate) {
+                const date = appointmentDate.getDate() + 1;
+                const month = appointmentDate.getMonth() + 1;
+                const year = appointmentDate.getFullYear();
+                const finalDate = date + "/" + month + "/" + year;
+                return finalDate;
+              } %>
+                                </table>
+                                <% if (showPopup) { %>
+                                    <form action="/closePopup" method="post">
+                                        <div id="popup_box">
+                                            <input id='id' name="id" value=<%=userDetails._id %> type="hidden" class='btn blue'>
+                                            <div id='userName' class='btn blue' style="display: flex;">
+                                                <span style="margin-left: 120px; font-size: 23px;color: wheat;">Name:</span>
+                                                <span style="font-size: 23px; color: wheat;"><%= userDetails.firstName +" "+userDetails.lastName  %></span>
+                                            </div>
+                                            <div id='carName' class='btn blue' style="display: flex;">
+                                                <span style="margin-left: 120px; font-size: 23px;color: wheat;">Car Name:</span>
+                                                <span style="font-size: 23px; color: wheat;"><%= userDetails.carInfo.make %></span>
+                                            </div>
+                                            <div id='carBrand' class='btn blue' style="display: flex;"><span style="margin-left: 120px; font-size: 23px;color: wheat;">Car Brand:</span>
+                                                <span style="font-size: 23px; color: wheat;"><%= userDetails.carInfo.model %></span>
+                                            </div>
+                                            <div id='carYear' class='btn blue' style="display: flex;"><span style="margin-left: 120px; font-size: 23px;color: wheat;">Car Year:</span>
+                                                <span style="font-size: 23px; color: wheat;"><%= userDetails.carInfo.year %></span>
+                                            </div>
+                                            <div id='carNo' class='btn blue' style="display: flex;"><span style="margin-left: 120px; font-size: 23px;color: wheat;">Plate Number:</span>
+                                                <span style="font-size: 23px; color: wheat;"><%= userDetails.carInfo.plateNumber %></span>
+                                            </div>
+                                            <div id='selectBox' class='btn blue' style="display: flex;">
+                                                <span style="margin-left: 120px; font-size: 23px;color: wheat;">Select Status</span>
+                                                <select name="testStatus" id="testStatus" style="width: 150px;
+                                                margin-left: 10px;
+                                                border-radius: 5px;
+                                                height: 34px;">
+                                                    <option value="Pass">Pass</option>
+                                                    <option value="Fail">Fail</option>
+                                                </select>
+                                            </div>
+                                            <div id='comment' class='btn blue' style="display: flex;"><span style="margin-left: 120px; font-size: 23px;color: wheat;">Comment:</span> <span style="font-size: 23px;"><textarea style="width: 200px;" name="comment"></textarea></span></div>
+                                            <div style="text-align: center;"><input type="submit" value="Submit" id="closePopup" /></div>
+                                        </div>
+                                    </form>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Footer-->
+            <%- include("layouts/footer") -%>
+                <%- include("layouts/scripts") -%>
+                    <!-- SCRIPTS-->
+    </body>
+
+</html>

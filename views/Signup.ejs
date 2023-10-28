@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <!-- Navigation-->
+    <%- include("layouts/header") -%>
+    <!-- Page Header-->
+    <%- include("layouts/navbar") -%>
+
+    <header
+      class="masthead"
+      style="background-image: url('assets/img/home-bg.jpg')"
+    >
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="site-heading">
+              <h2 class="heading">SignUp Page</h2>
+
+              <form action="/createUser" method="post">
+                <div class="container1">
+                  <label for="uname"><b>Username</b></label>
+                  <input
+                    type="text"
+                    placeholder="Enter Username"
+                    name="uname"
+                    required
+                  />
+
+                  <label for="psw"><b>Password</b></label>
+                  <input
+                    type="password"
+                    placeholder="Enter Password"
+                    name="psw"
+                    required
+                  />
+
+                  <label for="psw"><b>Repeat Password</b></label>
+                  <input
+                    type="password"
+                    placeholder="Repeat Password"
+                    name="Rpsd"
+                    required
+                  />
+
+                  <select name="type" id="type">
+                    <option value="driver">Driver</option>
+                    <option value="admin">Admin</option>
+                    <option value="examiner">Examiner</option>
+                  </select>
+
+                  <% if (obj.showErrorMsg) { %>
+                  <p style="color: rgb(106, 50, 50); text-align: center">
+                    Passwords did not Match
+                  </p>
+                  <% } %> <% if (obj.showUserNameError) { %>
+                  <p style="color: rgb(106, 50, 50); text-align: center">
+                    Username is already taken
+                  </p>
+                  <% } %>
+
+                  <button type="submit">SignUp</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Footer-->
+    <%- include("layouts/footer") -%> <%- include("layouts/scripts") -%>
+
+    <!-- Bootstrap core JS-->
+  </body>
+</html>

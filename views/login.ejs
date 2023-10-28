@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <!-- Navigation-->
+    <%- include("layouts/header") -%>
+    <!-- Page Header-->
+    <%- include("layouts/navbar") -%>
+
+    <header
+      class="masthead"
+      style="background-image: url('assets/img/home-bg.jpg')"
+    >
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="site-heading">
+              <h2 class="heading">Login Form</h2>
+
+              <form action="/checkUser" method="post">
+                <div class="container1">
+                  <label for="uname"><b>Username</b></label>
+                  <input
+                    type="text"
+                    placeholder="Enter Username"
+                    name="uname"
+                    required
+                  />
+
+                  <label for="psw"><b>Password</b></label>
+                  <input
+                    type="password"
+                    placeholder="Enter Password"
+                    name="psw"
+                    required
+                  />
+                  <% if (showErrorMsg) { %>
+                    <p style="color: aliceblue; text-align: center">Please <a href="Signup" style="color: aqua;">Register</a> yourself</p>
+                  <% } %>
+                  <button type="submit">Login</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Footer-->
+    <%- include("layouts/footer") -%> <%- include("layouts/scripts") -%>
+
+    <!-- Bootstrap core JS-->
+  </body>
+</html>

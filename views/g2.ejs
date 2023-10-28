@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("layouts/header") -%>
+
+  <body>
+    <!-- Navigation-->
+
+    <!-- Page Header-->
+    <%- include("layouts/navbar") -%>
+    <header
+      class="masthead"
+      style="background-image: url('assets/img/')"
+    >
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="site-heading">
+              <h2 class="g_head">G2 Page</h2>
+
+              <form action="/storePersonalInfo" method="post">
+                <h4 class="header-title">Personal Information</h4>
+                <input
+                  id="id"
+                  name="id"
+                  type="hidden"
+                  value=<%=personalInfo._id%>
+                >
+                <% if (personalInfo.disablePersonalInfoFields) { %>
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="firstName"
+                      class="form-control"
+                      id="firstName"
+                      disabled
+                      placeholder="First Name"
+                      value=<%=personalInfo.firstName%>
+                    >
+
+                    <!-- <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div> -->
+                  </div>
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="lastName"
+                      class="form-control"
+                      id="lastName"
+                      disabled
+                      placeholder="Last Name"
+                      value=<%=personalInfo.lastName%>
+                    >
+                    <div class="invalid-feedback">
+                      Valid last name is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="row g-3" style="margin-top: 3px">
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="age"
+                      class="form-control"
+                      id="firstName"
+                      disabled
+                      placeholder="Age"
+                      value=<%=personalInfo.age%>
+                      >
+                    <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <input
+                      type="hidden"
+                      name="license"
+                      class="form-control"
+                      id="license"
+                      placeholder="License Number"
+                      value=<%=personalInfo.licenseNumber%>
+                      >
+                    <div class="invalid-feedback">
+                      Valid license number is required.
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                    name="date"
+                    type="date"
+                    id="dateValueG2"
+                    class="loginTextElement"
+                    placeholder="Date"
+                  />
+                  <input
+                    name="date"
+                    type="hidden"
+                    id="hiddenDateValueG2"
+                    class="loginTextElement"
+                    placeholder="Date"
+                    value=<%= stringData %> 
+                  />
+                  </div>
+                  <div>
+                    <select name="g2time" id="g2time">
+                    </select>
+                    <input type="hidden" name="hiddenG2Time" id="hiddenG2Time">
+                  </div>
+                </div>
+                <% } else { %>
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="firstName"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="First name"
+                      value=<%=personalInfo.firstName%>
+                      >
+
+                    <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="lastName"
+                      class="form-control"
+                      id="lastName"
+                      placeholder="Last name"
+                      value=<%=personalInfo.lastName%>
+                      >
+                    <div class="invalid-feedback">
+                      Valid last name is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="row g-3" style="margin-top: 3px">
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="age"
+                      class="form-control"
+                      id="firstName"
+                      placeholder="Age"
+                      value=<%=personalInfo.age%>
+                      >
+                    <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="license"
+                      class="form-control"
+                      id="license"
+                      placeholder="License Number"
+                      value=<%=personalInfo.licenseNumber%>
+                      >
+                    <div class="invalid-feedback">
+                      Valid license number is required.
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    name="date"
+                    type="date"
+                    id="dateValueG2"
+                    class="loginTextElement"
+                    placeholder="Date"
+                  />
+                  <input
+                    name="date"
+                    type="hidden"
+                    id="hiddenDateValueG2"
+                    class="loginTextElement"
+                    placeholder="Date"
+                    value=<%= stringData %> 
+                  />
+                  <select name="g2time" id="g2time">
+                  </select>
+                  <input type="hidden" name="hiddenG2Time" id="hiddenG2Time">
+                </div>
+                <% } %>
+                <h4 class="header-t1" style="margin-top: 80px">
+                  Vehicle Information
+                </h4>
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="make"
+                      class="form-control"
+                      id="make"
+                      placeholder="Company"
+                      value=<%=personalInfo.carInfo.make%>
+                      >
+                    <div>Valid manufacturer is required.</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="model"
+                      class="form-control"
+                      id="model"
+                      placeholder="Model"
+                      value=<%=personalInfo.carInfo.model%>
+                    >
+                    <div class="invalid-feedback">
+                      Valid model name is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row g-3" style="margin-top: 3px">
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      name="year"
+                      class="form-control"
+                      id="year"
+                      placeholder="Year"
+                      value=<%=personalInfo.carInfo.year%>
+                    >
+                    <div class="invalid-feedback">Valid year is required.</div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="plateNumber"
+                      placeholder="Plate Number"
+                      name="plateNumber"
+                      value=<%=personalInfo.carInfo.plateNumber%>
+                     >
+                    <div class="invalid-feedback">
+                      Valid plate number is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12" style="margin-bottom: 150px">
+                  <button
+                    class="btn btn-primary"
+                    type="submit"
+                    style="
+                      margin-top: 30px;
+                      background-color: #0d6efd;
+                      width: auto;
+                      color: white;
+                    "
+                  >
+                    Submit form
+                  </button>
+                </div>
+              </form>
+              <% if (showStatusPopup) { %>
+                <form action="/closeStatusPopup" method="post">
+                    <div id="popup_box1">
+                        <table style="margin: 15px;">
+                            <tr>
+                                <th style="border: 1px solid cadetblue;
+                                text-align: left;
+                                padding: 8px;">Comments</th>
+                                <th style="border: 1px solid cadetblue;
+                                text-align: left;
+                                padding: 8px;">Status</th>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid cadetblue;
+                                text-align: left;
+                                padding: 8px;">
+                                    <%= result.comments  %>
+                                </td>
+                                <td style="border: 1px solid cadetblue;
+                                text-align: left;
+                                padding: 8px;">
+                                    <%= result.testStatus %>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div><input style="text-align: center; background-color: #904e4e;
+                          border: none;
+                          color: white;
+                          padding: 15px 32px;
+                          text-align: center;
+                          text-decoration: none;
+                          align-content: center;
+                          margin-left: 200px;
+                          display: inline-block;
+                          font-size: 16px;
+                          border-radius: 20px;
+                          margin: 4px 2px;
+                          cursor: pointer;
+                          margin-left: 200px;
+                          -webkit-transition-duration: 0.4s;
+                          transition-duration: 0.4s;" type="submit" value="Close" id="closePopup" /></div>
+                    </div>
+                </form>
+                <% } %>
+
+
+                    <br/>
+                    <form action="/getResultg2" method="get">
+                      <input type="submit" value="Check Result" class="sbmtBtn" /></form>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <%- include("layouts/footer") -%> <%- include("layouts/scripts") -%>
+  </body>
+</html>
