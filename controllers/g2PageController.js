@@ -25,6 +25,7 @@ const g2Page = async (req, res) => {
 
 const fetchPersonalInfo = async (req, res) => {
   try {
+    console.log(req.session.userId, "req.session.userId");
     let showStatusPopup = req.body.showStatusPopup ? req.body.showStatusPopup : false;
     let personalInfo = await PersonalInfo.findById(req.session.userId).lean();
     console.log(personalInfo, "personalInfoIn30");
