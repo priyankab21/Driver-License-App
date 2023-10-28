@@ -62,11 +62,16 @@ const fetchPersonalInfo = async (req, res) => {
         }
       });
     } else {
-      const obj = { userNotFound: true };
+      personalInfo.disablePersonalInfoFields = true;
+      global.disablePersonalInfoFields = true;
+      console.log(personalInfo, 'personalInfo')
+      const stringData = req.body.stringData;
+      const result = req.body.result ? req.body.result : {};
+      showStatusPopup = req.body.showStatusPopup;
       if (req.url === "/g") {
-        res.render("g", { personalInfo: obj });
+        res.render("g", { personalInfo, stringData, showStatusPopup, result });
       } else {
-        res.render("g2", { personalInfo });
+        res.render("g2", { personalInfo, stringData, showStatusPopup, result });
       }
     }
   } catch (e) {
