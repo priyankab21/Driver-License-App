@@ -39,7 +39,9 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 mongoose.connect(
-  "mongodb+srv://Priyanka:Priya123@cluster0.lpxrfgj.mongodb.net/?retryWrites=true&w=majority"
+  "mongodb+srv://Priyanka:Priya123@cluster0.lpxrfgj.mongodb.net/?retryWrites=true&w=majority", {
+    useNewUrlParser: true
+  }
 );
 
 const port = 4005;
