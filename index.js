@@ -27,17 +27,15 @@ app.use(
   expressSession({
     secret: "bhosle396",
     resave: false,
-    saveUninitialized: true,
-    httpOnly: false
+    saveUninitialized: true
   })
 );
 app.use(expressSession({
-  // ...
   cookie: {
       secure: true, // Use secure cookies in production (requires HTTPS)
       sameSite: 'none', // Appropriate for cross-origin cookies
+      httpOnly: false
   },
-  // ...
 }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
