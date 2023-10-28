@@ -5,7 +5,7 @@ const signUp = (req, res) => {
     showErrorMsg: false,
     showUserNameError: false,
   };
-  res.render("signup", { obj });
+  res.render("Signup", { obj });
 };
 
 const createUser = async (req, res) => {
@@ -20,7 +20,7 @@ const createUser = async (req, res) => {
     console.log(userName, 'userName')
     if (userName) {
       obj.showUserNameError = true;
-      res.render("signup", { obj });
+      res.render("Signup", { obj });
     } else if (req.body.psw === req.body.Rpsd) {
       const obj = {
         username: req.body.uname,
@@ -31,7 +31,7 @@ const createUser = async (req, res) => {
       res.redirect("/login");
     } else {
       obj.showErrorMsg = true;
-      res.render("signup", { obj });
+      res.render("Signup", { obj });
     }
   } catch (e) {
     console.log(e);
