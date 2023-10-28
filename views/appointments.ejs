@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("layouts/header") -%>
+  <body>
+    <!-- Navigation-->
+    <%- include("layouts/navbar") -%>
+
+    <!-- Page Header-->
+    <header
+      class="masthead"
+      style="background-image: url('assets/img/Login Page.jpg')"
+    >
+      <div
+        class="container position-relative px-4 px-lg-5"
+        style="margin-top: 90px"
+      >
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="psnlInfo">
+              <h2 class="loginHeading">Appointments</h2>
+              <form action="/createAppointment" method="post">
+                <div>
+                  <input
+                    name="hiddenDate"
+                    type="hidden"
+                    id="hiddenDateValue"
+                    class="loginTextElement"
+                    placeholder="Date"
+                    value=<%= stringData %> 
+                  />
+                  <input
+                    name="date"
+                    type="date"
+                    id="dateValue"
+                    class="loginTextElement"
+                    placeholder="Date"
+                  />
+
+                  <select name="time" id="time">
+                    <%
+                    for ( var i = 0; i < allAppointmentstime.length; i++ )
+                    {
+                        var selected = ( allAppointmentstime[i].disabled === true ) ? "disabled" : "";
+                        %><option value="<%=allAppointmentstime[i].time %>" <%=selected %>><%=allAppointmentstime[i].time %></option><%
+                    }
+                    %> 
+                  </select>
+                <input type="submit" class="sbmtBtn" />
+                
+              </form>
+              <form style="background-color: #6ec7bc6e; border-radius: 8px; padding:20px;" action="/searchByTestResult" method="post">
+                                    Search by Test Type: <select name="testStatus" id="testStatus">
+                                                          <option value="Pass">Pass</option>
+                                                          <option value="Fail">Fail</option>
+                                                      </select>
+                                    <input style="text-align: center; background-color: #904e4e;
+                                          border: none;
+                                          color: white;
+                                          padding: 15px 20px;
+                                          text-align: center;
+                                          text-decoration: none;
+                                          align-content: center;
+                                          margin-left: 200px;
+                                          display: inline-block;
+                                          font-size: 16px;
+                                          border-radius: 20px;
+                                          margin: 4px 2px;
+                                          cursor: pointer;
+                                          -webkit-transition-duration: 0.4s;
+                                          transition-duration: 0.4s;" type="submit" />
+                                </form>
+                                <br/>
+                                <br/>
+                                <div id="appointmentsTable">
+                                    <table id="table">
+                                        <tr id="tableHeadingRow">
+                                            <th id="tableHeading">Username</th>
+                                            <th id="tableHeading">Appointment Date</th>
+                                            <th id="tableHeading">Appointment Time</th>
+                                            <th id="tableHeading">Test Type</th>
+                                            <th id="tableHeading">Status</th>
+                                            <th id="tableHeading">Comments</th>
+                                        </tr>
+                                        <% for( let i = 0; i < appointments.length; i++ ) { %>
+                                            <tr id="tableDataRow">
+                                                <td id="tableData">
+
+                                                    <%= appointments[i].firstName ? appointments[i].firstName + " " + appointments[i].lastName : null %>
+
+                                                </td>
+                                                <td id="tableData">
+                                                    <%= appointments[i].appointmentID ? formatDate(new Date(appointments[i].appointmentID.date)) : null %>
+                                                </td>
+                                                <td id="tableData">
+                                                    <%= appointments[i].appointmentID ? appointments[i].appointmentID.time : null %>
+                                                </td>
+                                                <td id="tableData">
+                                                    <%= appointments[i].testType ? appointments[i].testType : null %>
+                                                </td>
+                                                <td id="tableData">
+                                                    <%= appointments[i].testStatus ? appointments[i].testStatus : null %>
+                                                </td>
+                                                <td id="tableData">
+                                                    <%= appointments[i].comments ? appointments[i].comments : null %>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                                <% function formatDate(appointmentDate) {
+                const date = appointmentDate.getDate() + 1;
+                const month = appointmentDate.getMonth() + 1;
+                const year = appointmentDate.getFullYear();
+                const finalDate = date + "/" + month + "/" + year;
+                return finalDate;
+              } %>
+                                    </table>
+                                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Post Content-->
+    <!-- Footer-->
+    <%- include("layouts/footer") -%> 
+    <%- include("layouts/scripts") -%>
+  </body>
+</html>
