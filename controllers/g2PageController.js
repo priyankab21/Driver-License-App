@@ -27,8 +27,8 @@ const fetchPersonalInfo = async (req, res) => {
   try {
     let showStatusPopup = req.body.showStatusPopup ? req.body.showStatusPopup : false;
     let personalInfo = await PersonalInfo.findById(req.session.userId).lean();
+    console.log(personalInfo, "personalInfoIn30");
     if (personalInfo && personalInfo.firstName) {
-      console.log(personalInfo, "personalInfo");
       bcrypt.compare("Default", personalInfo.licenseNumber, (err, same) => {
         console.log(same, "same");
         if (same) {
