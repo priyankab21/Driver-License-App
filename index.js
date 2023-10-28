@@ -28,6 +28,7 @@ app.use(
     secret: "bhosle396",
     resave: false,
     saveUninitialized: true,
+    httpOnly: false
   })
 );
 app.use(expressSession({
