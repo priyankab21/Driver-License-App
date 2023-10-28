@@ -7,8 +7,10 @@ const login = (req, res) => {
 };
 
 const validateUser = (req, res) => {
+  console.log(req.body, 'req.body')
   const { uname, psw } = req.body;
   PersonalInfo.findOne({ username: uname }, (err, user) => {
+    console.log(user, 'user')
     if (user) {
       bcrypt.compare(psw, user.password, (error, same) => {
         if (same) {
