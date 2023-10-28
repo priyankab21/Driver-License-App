@@ -30,6 +30,14 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(session({
+  // ...
+  cookie: {
+      secure: true, // Use secure cookies in production (requires HTTPS)
+      sameSite: 'none', // Appropriate for cross-origin cookies
+  },
+  // ...
+}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
