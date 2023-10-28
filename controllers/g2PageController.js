@@ -27,7 +27,7 @@ const fetchPersonalInfo = async (req, res) => {
   try {
     let showStatusPopup = req.body.showStatusPopup ? req.body.showStatusPopup : false;
     let personalInfo = await PersonalInfo.findById(req.session.userId).lean();
-    // if (personalInfo && personalInfo.firstName) {
+    if (personalInfo && personalInfo.firstName) {
       console.log(personalInfo, "personalInfo");
       bcrypt.compare("Default", personalInfo.licenseNumber, (err, same) => {
         console.log(same, "same");
@@ -61,14 +61,14 @@ const fetchPersonalInfo = async (req, res) => {
           res.render("g2", { personalInfo, stringData, showStatusPopup, result });
         }
       });
-    // } else {
-    //   const obj = { userNotFound: true };
-    //   if (req.url === "/g") {
-    //     res.render("g", { personalInfo: obj });
-    //   } else {
-    //     res.render("g2", { personalInfo });
-    //   }
-    // }
+    } else {
+      const obj = { userNotFound: true };
+      if (req.url === "/g") {
+        res.render("g", { personalInfo: obj });
+      } else {
+        res.render("g2", { personalInfo });
+      }
+    }
   } catch (e) {
     console.log(e);
   }
